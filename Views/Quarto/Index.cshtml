@@ -1,0 +1,52 @@
+@model IEnumerable<GestaoHotelJoao.Models.Quarto>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link href="~/css/Quarto/index.css" rel="stylesheet" />
+    </head>
+    <h1>Lista de quartos</h1>
+
+    <div class="d-flex justify-content-center mb-3">
+        <a asp-action="Create" class="btn btn-primary">Adicionar novo tipo de quarto <i class="fas fa-plus"></i></a>
+    </div>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoQuarto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustoNoite)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoQuarto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustoNoite)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default">Editar <i
+                            class="fas fa-edit"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary">Apagar <i
+                            class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <hr class="my-4">
+    <div class="d-flex justify-content-center mb-3">
+        <a asp-controller="AdminArea" asp-action="Index" class="btn btn-primary">Voltar <i
+                class="fas fa-arrow-left"></i></a>
+    </div>

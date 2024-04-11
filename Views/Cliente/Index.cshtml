@@ -1,0 +1,59 @@
+@model IEnumerable<GestaoHotelJoao.Models.Cliente>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link href="~/css/Cliente/index.css" rel="stylesheet" />
+    </head>
+
+    <h1>Os nossos clientes</h1>
+
+    <div class="d-flex justify-content-center mb-3">
+        <a asp-action="Create" class="btn btn-primary">Adicionar um novo cliente <i class="fas fa-plus"></i></a>
+    </div>
+
+    <div class="d-flex justify-content-center mb-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contacto)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contacto)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default">Editar <i
+                                class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary">Apagar <i
+                                class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center mb-3">
+        <a href="@Url.Action("ExportCsv", "Cliente" )" class="btn btn-primary">Exportar para CSV <i
+                class="fas fa-download"></i></a>
+        <form asp-controller="Cliente" asp-action="ExportPdf" method="post">
+            <button type="submit" class="btn btn-primary">Exportar para PDF <i class="fas fa-download"></i></button>
+        </form>
+
+    </div>
+

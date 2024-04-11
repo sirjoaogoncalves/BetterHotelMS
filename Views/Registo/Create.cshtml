@@ -1,0 +1,93 @@
+@model GestaoHotelJoao.Models.Registo
+
+@{
+    ViewData["Title"] = "Create";
+}
+<head>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ <link href="~/css/Registo/create.css" rel="stylesheet" />
+</head>
+<h1 class="text-center">Criar Registo</h1>
+<hr />
+<div class="container d-flex justify-content-center">
+    <div class="col-md-8">
+        <form asp-action="Create" class="needs-validation"  novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="CheckIn" class="form-label">Check-In</label>
+                    <input asp-for="CheckIn" class="form-control datepicker" required style="text-align: center" />
+                    <div class="invalid-feedback">Insira uma data válida.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="CheckOut" class="form-label">Check-Out</label>
+                    <input asp-for="CheckOut" class="form-control datepicker" required style="text-align: center" />
+                    <div class="invalid-feedback">Insira uma data válida.</div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="QuartoId" class="form-label">Tipo de Quarto</label>
+                    <select asp-for="QuartoId" class="form-select" asp-items="ViewBag.QuartoId" required style="text-align: center" ></select>
+                    <div class="invalid-feedback">Por favor, selecione um quarto.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="ClienteId" class="form-label">Cliente</label>
+                    <select asp-for="ClienteId" class="form-select" asp-items="ViewBag.ClienteId" required style="text-align: center" ></select>
+                    <div class="invalid-feedback">Por favor, selecione um cliente.</div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="FuncionarioId" class="form-label">Funcionário</label>
+                    <select asp-for="FuncionarioId" class="form-select" asp-items="ViewBag.FuncionarioId" required style="text-align: center" ></select>
+                    <div class="invalid-feedback">Por favor, selecione um funcionário.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="TotalDiasEstadia" class="form-label">Total de Dias</label>
+                    <input asp-for="TotalDiasEstadia" class="form-control" style="color: black; text-align: center" readonly />
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-save"></i></button>
+                <a asp-action="Index" class="btn btn-secondary">Voltar <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var currentDate = new Date();
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd', // Define the date format
+                startDate: currentDate, // Set the default date to the present date
+                autoclose: true // Close the date picker when a date is selected
+            });
+
+            // Calculate total number of days automatically
+            $('#CheckIn, #CheckOut').change(function() {
+                var checkIn = new Date($('#CheckIn').val());
+                var checkOut = new Date($('#CheckOut').val());
+                var timeDiff = checkOut.getTime() - checkIn.getTime();
+                var totalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                $('#TotalDiasEstadia').val(totalDays);
+            });
+        });
+    </script>
+}
+

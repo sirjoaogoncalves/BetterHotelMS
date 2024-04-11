@@ -1,0 +1,68 @@
+@model GestaoHotelJoao.Models.Registo
+
+@{
+ViewData["Title"] = "Delete";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="~/css/Registo/delete.css" rel="stylesheet" />
+</head>
+
+<h1>Tem a certeza que pretende apagar este registo?</h1>
+<hr />
+<div class="container d-flex justify-content-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Total de Dias de Estadia</th>
+                <th>Nome do Cliente</th>
+                <th>Nome do Funcionário</th>
+                <th>Tipo de Quarto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.CheckIn)</td>
+                <td>@Html.DisplayFor(model => model.CheckOut)</td>
+                <td>@Html.DisplayFor(model => model.TotalDiasEstadia)</td>
+                <td>@Html.DisplayFor(model => model.Cliente.Nome)</td>
+                <td>@Html.DisplayFor(model => model.Funcionario.Nome)</td>
+                <td>@Html.DisplayFor(model => model.Quarto.TipoQuarto)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <form asp-action="Delete" class="action-buttons" onsubmit="return confirmDelete()">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Apagar" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-primary">Voltar <i class="fas fa-arrow-left"></i></a>
+    </form>
+</div>
+
+<hr class="my-4">
+
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja eliminar esta reserva?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelButton">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="confirmButton">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/delete.js"></script>
