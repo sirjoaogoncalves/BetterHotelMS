@@ -1,0 +1,88 @@
+body,
+html {
+    height: 100vh;
+    color: #efe7db;
+}
+
+.container {
+    height: 100%;
+}
+
+
+
+.btn-primary {
+    background-color: #545454;
+    color: #efe7db;
+    border: 0.5px solid #ca8a3c;
+}
+
+.btn-primary:hover {
+    background-color: #ca8a3c;
+    color: #efe7db;
+    border: 0.5px solid #efe7db;
+}
+
+
+.btn-default {
+    background-color: #222222;
+    border: 0.5px solid white;
+    color: #fff;
+}
+
+.btn-default:hover {
+    background-color: gold;
+    color: #000;
+    border: 0.5px solid gold;
+}
+
+.btn-secondary {
+    border: 0.5px solid white;
+    background-color: #222222;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: red;
+    color: #fff;
+    border: 0.5px solid red;
+}
+
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    color: #e8e1d6;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid #efe7db;
+    background-color: rgba(246, 184, 122, 0.2);
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: center;
+    color: #efe7db;
+}
+
+th {
+    background-color: #545454;
+}
+
+tbody tr:hover {
+    background-color: #ca8a3c;
+}

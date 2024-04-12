@@ -1,0 +1,55 @@
+body,
+html {
+    height: 100%;
+    color: #e8e1d6;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    color: #e8e1d6;
+}
+
+.container {
+    height: 100%;
+}
+
+.form-control,
+.form-select,
+.btn {
+    background-color: #545454;
+    color: #e8e1d6;
+    border-color: #e8e1d6;
+
+    .btn {
+        background-color: #545454;
+        color: #e8e1d6;
+        border-color: #e8e1d6;
+    }
+
+    .btn-primary:hover {
+        background-color: green;
+        border-color: green;
+    }
+
+    .btn-secondary:hover {
+        background-color: red;
+        border-color: red;
+    }
+
+
+    .invalid-feedback {
+        color: #ff6b6b;
+    }
+
+    .text-center {
+        color: #e8e1d6;
+    }
+
+    .form-label {
+        color: #e8e1d6;
+
+    }
+}

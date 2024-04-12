@@ -1,0 +1,35 @@
+
+body,
+html {
+    height: 100vh;
+    color: #fff;
+}
+
+
+
+.login-container {
+    height: 100vh;
+    margin-top: 100px;
+}
+
+.login-form {
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.login-form label {
+    font-weight: bold;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form button {
+    margin-top: 10px;
+    background-color: #222222;
+    color: #fff;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-top: 10px;
+}

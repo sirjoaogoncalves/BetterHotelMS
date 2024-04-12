@@ -1,0 +1,56 @@
+body,
+html {
+    height: 100vh;
+}
+
+.container {
+    height: 100%;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    color: #e8e1d6;
+}
+
+.admin-heading {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: #efe7db;
+}
+
+.admin-table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid #efe7db;
+    background-color: rgba(246, 184, 122, 0.2);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 8px;
+    text-align: center;
+    color: #efe7db;
+
+}
+
+.admin-table th {
+    background-color: #545454;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #ca8a3c;
+}
+
+.admin-link {
+    color: #efe7db;
+    text-decoration: none;
+}
+
+.admin-link:hover {
+    color: #545454;
+}

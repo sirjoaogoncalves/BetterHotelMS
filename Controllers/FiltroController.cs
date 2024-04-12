@@ -25,9 +25,11 @@ namespace GestaoHotelJoao.Controllers
             if (HttpContext.Session.GetString("ADMIN") == "true" || HttpContext.Session.GetString("FUNCIONARIO") == "true" || HttpContext.Session.GetString("LOGADO") == "true")
             {
                 var registos = await _context.Registos
-                 .Include(r => r.Cliente)
-                 .Include(r => r.Funcionario)
-                 .ToListAsync();
+                    .Include(r => r.Cliente)
+                    .Include(r => r.Funcionario)
+                    .ToListAsync();
+
+
                 return View(registos);
             }
             else
@@ -115,9 +117,9 @@ namespace GestaoHotelJoao.Controllers
             if (HttpContext.Session.GetString("ADMIN") == "true" || HttpContext.Session.GetString("FUNCIONARIO") == "true" || HttpContext.Session.GetString("LOGADO") == "true")
             {
                 var registos = await _context.Registos.Include(r => r.Cliente)
-                                                        .Include(r => r.Funcionario)
-                                                        .Include(r => r.Quarto)
-                                                        .ToListAsync();
+                    .Include(r => r.Funcionario)
+                    .Include(r => r.Quarto)
+                    .ToListAsync();
                 // CSV 
                 var builder = new StringBuilder();
                 builder.AppendLine("Id,CheckIn,CheckOut,Quarto,Cliente,Funcionario,Total Dias Estadia,Ganho Total Estadia");
@@ -146,9 +148,9 @@ namespace GestaoHotelJoao.Controllers
             if (HttpContext.Session.GetString("ADMIN") == "true" || HttpContext.Session.GetString("FUNCIONARIO") == "true" || HttpContext.Session.GetString("LOGADO") == "true")
             {
                 var registos = await _context.Registos.Include(r => r.Cliente)
-                                                        .Include(r => r.Funcionario)
-                                                        .Include(r => r.Quarto)
-                                                        .ToListAsync();
+                    .Include(r => r.Funcionario)
+                    .Include(r => r.Quarto)
+                    .ToListAsync();
 
                 var ganhosTotais = registos.Sum(r => r.Quarto.CustoNoite * r.TotalDiasEstadia);
 
@@ -157,8 +159,8 @@ namespace GestaoHotelJoao.Controllers
                 var writer = new PdfWriter(pdfStream);
                 var pdf = new PdfDocument(writer);
                 var document = new Document(pdf);
-                
-                
+
+
                 document.SetMargins(40, 40, 40, 40);
                 document.Add(new Paragraph("Relatório de Reservas").SetFontSize(20).SetTextAlignment(TextAlignment.CENTER));
                 document.Add(new Paragraph("Este relatório contém detalhes das reservas filtradas.").SetFontSize(12).SetTextAlignment(TextAlignment.CENTER));
@@ -176,8 +178,8 @@ namespace GestaoHotelJoao.Controllers
                 table.AddHeaderCell("Funcionario");
                 table.AddHeaderCell("Total Dias Estadia");
                 table.AddHeaderCell("Ganho Total Estadia");
-                
-              
+
+
 
                 foreach (var registo in registos)
                 {
@@ -207,7 +209,6 @@ namespace GestaoHotelJoao.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
-
 
     }
 }
