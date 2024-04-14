@@ -1,4 +1,3 @@
-
 # BetterHotel Management Studio
 
 ## Overview
@@ -37,6 +36,11 @@ This project is a Hotel Management System designed to facilitate the management 
 - **FiltroController**: Offers various filtering options for stay records, including filtering by date, client name, employee name, and room type.
 - Calculation of total earnings based on filtered records is also available.
 
+### Export to PDF and Excel
+
+- Users can export records of clients, reservations, and filtered stay records to PDF and Excel formats.
+- This feature enhances data accessibility and enables users to generate reports for analysis or sharing.
+
 ## Class Structure
 
 - **LoginController**: Manages user authentication, providing login, logout, and session management functionalities.
@@ -67,6 +71,7 @@ This project is a Hotel Management System designed to facilitate the management 
 
 ## License
 
-This project is licensed under the [MIT License]. 
+This project is licensed under the MIT License. 
+
 
 
