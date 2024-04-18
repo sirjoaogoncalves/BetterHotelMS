@@ -85,6 +85,41 @@ header {
     }
 }
 
+
+.navbar-toggler-icon {
+    background-color: #e8e1d6;
+}
+
+.navbar-nav {
+    text-align: center;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 10px;
+}
+
+.navbar {
+    background-color: #e8e1d6;
+}
+
+.navbar-brand {
+    color: #e8e1d6;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: #545454;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffaf00;
+}
+
+.navbar-text {
+    color: #545454;
+}
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
