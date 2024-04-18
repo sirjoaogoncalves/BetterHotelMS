@@ -20,23 +20,23 @@
 
                 <form asp-controller="Filtro" asp-action="FiltrarPorData" method="get">
                     <label for="startDate" class="dark-label">Check-in:</label>
-                    <input type="date" id="dataInicio" name="dataInicio">
+                    <input type="date" id="dataInicio" name="dataInicio" required>
                     <label for="endDate" class="dark-label">Check-out:</label>
-                    <input type="date" id="dataFim" name="dataFim">
+                    <input type="date" id="dataFim" name="dataFim" required>
                     <button type="submit" class="btn btn-primary">Filtrar por Data <i
                             class="fas fa-search"></i></button>
                 </form>
 
                 <form asp-controller="Filtro" asp-action="FiltrarPorCliente" method="get">
                     <label for="clientName" class="dark-label">Nome do cliente:</label>
-                    <input type="text" id="clientName" name="clienteName">
+                    <input type="text" id="clientName" name="clienteName" required>
                     <button type="submit" class="btn btn-primary">Filtrar por cliente <i
                             class="fas fa-search"></i></button>
                 </form>
 
                 <form asp-controller="Filtro" asp-action="FiltrarPorFuncionario" method="get">
                     <label for="employeeName" class="dark-label">Nome do funcionário:</label>
-                    <input type="text" id="employeeName" name="funcionarioName">
+                    <input type="text" id="employeeName" name="funcionarioName" required>
                     <button type="submit" class="btn btn-primary">Filtrar por funcionário <i
                             class="fas fa-search"></i></button>
                 </form>
@@ -93,17 +93,17 @@
                     <br>
                     <div id="funcionarioFilter">
                         <label for="employeeName" class="dark-label">Nome do funcionário:</label>
-                        <input type="text" id="employeeName" name="funcionarioName">
+                        <input type="text" id="employeeName" name="funcionarioName" required>
                     </div>
                     <div id="quartoFilter" style="display: none;">
                         <label for="roomType" class="dark-label">Tipo do quarto:</label>
-                        <input type="text" id="roomType" name="tipoQuarto">
+                        <input type="text" id="roomType" name="tipoQuarto" required>
                     </div>
                     <br>
                     <label for="startDate" class="dark-label">Check-in:</label>
-                    <input type="date" id="dataInicio" name="dataInicio">
+                    <input type="date" id="dataInicio" name="dataInicio" required>
                     <label for="endDate" class="dark-label">Check-out:</label>
-                    <input type="date" id="dataFim" name="dataFim">
+                    <input type="date" id="dataFim" name="dataFim" required>
                     <br>
                     <button type="submit" class="btn btn-primary">Filtrar por tipo <i
                             class="fas fa-search"></i></button>
