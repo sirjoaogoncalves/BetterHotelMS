@@ -1,0 +1,36 @@
+@model GestaoHotelJoao.Models.Funcionario
+
+@{
+ViewData["Title"] = "Edit";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="~/css/Funcionario/edit.css" rel="stylesheet" />
+</head>
+
+
+<h1>Editar</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group actions">
+                <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-save"></i></button>
+                <a asp-action="Index" class="btn btn-default">Voltar <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </form>
+    </div>
+</div>
+<hr class="my-4">
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -23,7 +23,7 @@ namespace GestaoHotelJoao.Controllers
         public async Task<IActionResult> Index()
         {
             if(HttpContext.Session.GetString("ADMIN") == "true" || 
-                (HttpContext.Session.GetString("FUNCIONARIO") == "true" && HttpContext.Session.GetString("LOGADO") == "true"))
+                    (HttpContext.Session.GetString("FUNCIONARIO") == "true" && HttpContext.Session.GetString("LOGADO") == "true"))
             {
                 return View(await _context.Clientes.ToListAsync());
             }
@@ -55,8 +55,8 @@ namespace GestaoHotelJoao.Controllers
         public IActionResult Create()
         {
             if ((HttpContext.Session.GetString("ADMIN") == "true" ||
-                 HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
-                 HttpContext.Session.GetString("LOGADO") == "true")
+                        HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
+                    HttpContext.Session.GetString("LOGADO") == "true")
             {
                 return View();
             }
@@ -72,8 +72,8 @@ namespace GestaoHotelJoao.Controllers
         public async Task<IActionResult> Create([Bind("Id,Nome,Contacto")] Cliente cliente)
         {
             if ((HttpContext.Session.GetString("ADMIN") == "true" ||
-                 HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
-                 HttpContext.Session.GetString("LOGADO") == "true")
+                        HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
+                    HttpContext.Session.GetString("LOGADO") == "true")
             {
                 if (ModelState.IsValid)
                 {
@@ -93,8 +93,8 @@ namespace GestaoHotelJoao.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if ((HttpContext.Session.GetString("ADMIN") == "true" ||
-                 HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
-                 HttpContext.Session.GetString("LOGADO") == "true")
+                        HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
+                    HttpContext.Session.GetString("LOGADO") == "true")
             {
                 if (id == null)
                 {
@@ -151,8 +151,8 @@ namespace GestaoHotelJoao.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if ((HttpContext.Session.GetString("ADMIN") == "true" ||
-                 HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
-                 HttpContext.Session.GetString("LOGADO") == "true")
+                        HttpContext.Session.GetString("FUNCIONARIO") == "true") && 
+                    HttpContext.Session.GetString("LOGADO") == "true")
             {
                 if (id == null)
                 {
@@ -187,8 +187,8 @@ namespace GestaoHotelJoao.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-   
-         public async Task<IActionResult> ExportCsv()
+
+        public async Task<IActionResult> ExportCsv()
         {
             if(HttpContext.Session.GetString("ADMIN") == "true" || HttpContext.Session.GetString("FUNCIONARIO") == "true" && HttpContext.Session.GetString("LOGADO") == "true")
             {
@@ -199,7 +199,7 @@ namespace GestaoHotelJoao.Controllers
 
                 foreach (var cliente in clientes)
                 {
-                    
+
                     builder.AppendLine($"{cliente.Id},{cliente.Nome},{cliente.Contacto}");
                 }
 
@@ -226,23 +226,22 @@ namespace GestaoHotelJoao.Controllers
                 var writer = new PdfWriter(pdfStream);
                 var pdf = new PdfDocument(writer);
                 var document = new Document(pdf);
-               
+
                 document.SetMargins(40, 40, 40, 40);
                 document.Add(new Paragraph("Relatório de Clientes").SetFontSize(20).SetTextAlignment(TextAlignment.CENTER));
                 document.Add(new Paragraph("Este relatório contém detalhes dos clientes.").SetFontSize(12).SetTextAlignment(TextAlignment.CENTER));
                 document.Add(new Paragraph("\n")); // Espaço entre o título e a tabela                
 
- Div div = new Div();
-        div.SetTextAlignment(TextAlignment.CENTER);
-        div.Add(new Paragraph("")); // Add any additional spacing if needed
-
+                Div div = new Div();
+                div.SetTextAlignment(TextAlignment.CENTER);
+                div.Add(new Paragraph("")); 
                 var table = new Table(3);
-                
+
 
                 table.AddHeaderCell("Id");
                 table.AddHeaderCell("Nome");
                 table.AddHeaderCell("Contacto");
-               
+
 
                 foreach (var cliente in clientes)
                 {
@@ -250,7 +249,7 @@ namespace GestaoHotelJoao.Controllers
                     table.AddCell(cliente.Id.ToString());
                     table.AddCell(cliente.Nome);
                     table.AddCell(cliente.Contacto.ToString());
-                 }
+                }
 
                 document.Add(table);
                 document.Close();
@@ -263,6 +262,55 @@ namespace GestaoHotelJoao.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+        }
+
+        public async Task<IActionResult> ImportCsv(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                ModelState.AddModelError("", "Please select a file to import.");
+                return View();
+            }
+
+            if (!file.FileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError("", "Please select a CSV file.");
+                return View();
+            }
+
+            // Read the CSV file
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            {
+                List<Cliente> clientes = new List<Cliente>();
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    // Skip the header line
+                    if (line.StartsWith("Id,Nome,Contacto"))
+                        continue;
+
+                    var values = line.Split(',');
+                    if (values.Length != 3)
+                    {
+                        ModelState.AddModelError("", "Invalid CSV format.");
+                        return View();
+                    }
+
+                    var cliente = new Cliente
+                    {
+                        Nome = values[1],
+                        Contacto = Convert.ToInt32(values[2])
+                    };
+
+                    clientes.Add(cliente);
+                }
+
+                // Add clients to the database
+                await _context.AddRangeAsync(clientes);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
         }
 
         private bool ClienteExists(int id)

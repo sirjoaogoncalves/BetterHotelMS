@@ -1,49 +1,63 @@
 @model IEnumerable<GestaoHotelJoao.Models.Funcionario>
 
-    @{
-    ViewData["Title"] = "Index";
-    }
+@{
+ViewData["Title"] = "Index";
+}
 
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link href="~/css/Funcionario/index.css" rel="stylesheet" />
-    </head>
-    
-    <h1>Os nossos funcionários</h1>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="~/css/Funcionario/index.css" rel="stylesheet" />
+</head>
 
-    <div class="d-flex justify-content-center mb-3">
-        <a asp-action="Create" class="btn btn-primary">Adicionar um novo funcionario <i class="fas fa-plus"></i></a>
-    </div>
-    <hr />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    <a class="btn btn-default" asp-action="Edit" asp-route-id="@item.Id">Editar <i
-                            class="fas fa-edit"></i></a>
-                    <a class="btn btn-secondary" asp-action="Delete" asp-route-id="@item.Id">Apagar <i
-                            class="fas fa-trash"></i></a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+<h1>Os nossos funcionários</h1>
 
-    <hr class="my-4" />
+<div class="d-flex justify-content-center mb-3">
+    <a asp-action="Create" class="btn btn-primary">Adicionar um novo funcionario <i class="fas fa-plus"></i></a>
+</div>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                <a class="btn btn-default" asp-action="Edit" asp-route-id="@item.Id">Editar <i
+                        class="fas fa-edit"></i></a>
+                <a class="btn btn-secondary" asp-action="Delete" asp-route-id="@item.Id">Apagar <i
+                        class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<hr class="my-4" />
+
+<div class="d-flex justify-content-center mb-3">
+    <form asp-controller="Funcionario" asp-action="ImportCsv" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" style="display: none;" onchange="handleFileSelect(event)" />
+        <label for="file" class="btn btn-primary">Importar CSV <i class="fas fa-upload"></i></label>
+        <button type="submit" id="importButton" style="display: none;"></button>
+    </form>
 
 
- <div class="d-flex justify-content-center mb-3">
     <a asp-controller="AdminArea" asp-action="Index" class="btn btn-primary">Voltar <i class="fas fa-arrow-left"></i></a>
 </div>
+
+
+<script>
+    function handleFileSelect(event) {
+        document.getElementById('importButton').click();
+    }
+</script>
+

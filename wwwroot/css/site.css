@@ -12,7 +12,7 @@ body {
     font-size: 15px;
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../assets/test3.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../assets/test3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -94,4 +94,8 @@ footer {
     color: #545454;
     background-color: #e8e1d6;
     text-align: center;
+    position: sticky; 
+    bottom: 0; 
+    width: 100%; 
+    z-index: 999; 
 }

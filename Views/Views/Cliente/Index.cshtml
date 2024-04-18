@@ -54,16 +54,6 @@
         <form asp-controller="Cliente" asp-action="ExportPdf" method="post">
             <button type="submit" class="btn btn-primary">Exportar para PDF <i class="fas fa-download"></i></button>
         </form>
-	<form asp-controller="Cliente" asp-action="ImportCsv" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="file" style="display: none;" onchange="handleFileSelect(event)" />
-        <label for="file" class="btn btn-primary">Importar CSV <i class="fas fa-upload"></i></label>
-        <button type="submit" id="importButton" style="display: none;"></button>
-    </form>
+
     </div>
-    
-    <script>
-    function handleFileSelect(event) {
-        document.getElementById('importButton').click();
-    }
-</script>
 

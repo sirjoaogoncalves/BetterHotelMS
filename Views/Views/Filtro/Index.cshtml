@@ -5,9 +5,8 @@
     }
     <head>
         <title>@ViewData["Title"]</title>
-         <link href="~/css/Filtro/index.css" rel="stylesheet" />
+        <link href="~/css/Filtro/index.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
@@ -42,6 +41,7 @@
                 </form>
             </div>
             <div class="middle-section">
+             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -80,10 +80,11 @@
                                 class="fas fa-download"></i></button>
                     </form>
                 </div>
+                </div>
             </div>
+            <hr class="my-4"/>
             <div class="right-section">
-
-                <h2>Filtro específico:</h2>
+                <h2>Filtro Especifico</h2>
                 <form asp-controller="Filtro" asp-action="FiltrarPorTipo" method="get">
                     <label for="filterType" class="dark-label">Filtrar por:</label>
                     <select id="filterType" name="tipoFiltro">
@@ -114,6 +115,8 @@
         </div>
         <hr class="my-4">
         <script src="~/js/filtro.js"></script>
+       
+
     </body>
 
 

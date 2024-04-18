@@ -1,0 +1,154 @@
+﻿@{
+var session = ViewContext.HttpContext.Session;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BetterHotel Management Studio</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<style>
+    .navbar-toggler-icon {
+        background-color: #e8e1d6;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0 10px;
+    }
+
+    .navbar {
+        background-color: #e8e1d6;
+    }
+
+    .navbar-brand {
+        color: #e8e1d6;
+        font-size: 1.5rem;
+    }
+
+    .navbar-nav .nav-link {
+        color: #545454;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #ffaf00;
+    }
+
+    .navbar-text {
+        color: #545454;
+    }
+</style>
+
+<body>
+
+
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BetterHotel MS</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        @if (session.GetString("LOGADO") == "true")
+                        {
+                        if (session.GetString("ADMIN") == "true" || session.GetString("FUNCIONARIO") == "true")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes <i
+                                    class="fas fa-users"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Registo" asp-action="Index">Reservas <i
+                                    class="fas fa-calendar-alt"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Filtro" asp-action="Index">Procurar <i
+                                    class="fas fa-search"></i></a>
+                        </li>
+
+                        @if (session.GetString("ADMIN") == "true")
+                        {
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="AdminArea" asp-action="Index">Area Admin <i
+                                    class="fas fa-user-shield"></i></a>
+                        </li>
+                        }
+                        }
+                        }
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <span class="navbar-text">
+                                @if (session.GetString("UTILIZADOR") != null)
+                                {
+                                <a class="nav-link" style="color: #ffaf00">@session.GetString("UTILIZADOR") <i
+                                        class="fas fa-user"></i></a>
+                                }
+                                else
+                                {
+                                <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </a>
+                                }
+                            </span>
+                        </li>
+                        @if (session.GetString("LOGADO") == "true")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </li>
+                        }
+                        @if (session.GetString("LOGADO") == "false")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </a>
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('.navbar-toggler').on('click', function () {
+                $('#navbarNav').toggleClass('show');
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
+

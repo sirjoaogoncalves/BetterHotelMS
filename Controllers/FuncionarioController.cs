@@ -190,8 +190,8 @@ namespace GestaoHotelJoao.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var funcionario = await _context.Funcionarios
-                                            .Include(f => f.Registos)
-                                            .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(f => f.Registos)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (funcionario == null)
             {
@@ -208,6 +208,56 @@ namespace GestaoHotelJoao.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+         public async Task<IActionResult> ImportCsv(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                ModelState.AddModelError("", "Please select a file to import.");
+                return View();
+            }
+
+            if (!file.FileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError("", "Please select a CSV file.");
+                return View();
+            }
+
+            // Read the CSV file
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            {
+                List<Funcionario> funcionarios = new List<Funcionario>();
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    // Skip the header line
+                    if (line.StartsWith("Id,Nome"))
+                        continue;
+
+                    var values = line.Split(',');
+                    if (values.Length != 2)
+                    {
+                        ModelState.AddModelError("", "Invalid CSV format.");
+                        return View();
+                    }
+
+                    var funcionario = new Funcionario
+                    {
+                        Nome = values[1],
+                    };
+
+                    funcionarios.Add(funcionario);
+                }
+
+                // Add clients to the database
+                await _context.AddRangeAsync(funcionarios);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
         private bool FuncionarioExists(int id)
         {
             return _context.Funcionarios.Any(e => e.Id == id);

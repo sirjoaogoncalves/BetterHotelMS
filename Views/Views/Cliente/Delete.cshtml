@@ -1,0 +1,61 @@
+@model GestaoHotelJoao.Models.Cliente
+
+@{
+ViewData["Title"] = "Delete";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="~/css/Cliente/delete.css" rel="stylesheet" />
+</head>
+
+
+
+<h1>Tem certeza que deseja apagar este cliente?</h1>
+<hr />
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Contacto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Nome)</td>
+                <td>@Html.DisplayFor(model => model.Contacto)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form asp-action="Delete" class="action-buttons" onsubmit="return confirmDelete()" >
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Apagar <i class="fas fa-trash"></i></button>
+        <a asp-action="Index" class="btn btn-primary">Voltar <i class="fas fa-arrow-left"></i></a>
+    </form>
+    <hr class="my-4">
+</div>
+
+<!-- modal -->
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja apagar este cliente?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelButton">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="confirmButton">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/delete.js"></script>
+
